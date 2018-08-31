@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Login</ion-title>
+    <button ion-button menuToggle="RIGHTMENU" right>
+      <ion-icon name="ios-more"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="login-wrapper">
+  <ion-card *ngIf="!showForm">
+    <ion-card-header>
+      Slect Your Location
+    </ion-card-header>
+    <ion-card-content>
+      <div class="add-location" (click)="openAppointmentForm()">
+        <ion-icon name="add" class="add-icon"></ion-icon>
+        <div class="new-location">
+          <div>New Location</div>
+          <div>Click to add</div>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <div *ngIf="showForm">
+    <form [formGroup]="appointmentForm" (ngSubmit)="saveAppointmentForm()">
+      <ion-item class="input-holder">
+        <ion-label floating>Firstname</ion-label>
+        <ion-input TYPE="TEXT" formControlName="firstName"></ion-input>
+      </ion-item>
+      <ion-item class="input-holder">
+        <ion-label floating>Lastname</ion-label>
+        <ion-input TYPE="TEXT" formControlName="lastName"></ion-input>
+      </ion-item>
+      <ion-item class="input-holder">
+        <ion-label floating>Phone Number</ion-label>
+        <ion-input TYPE="TEL" formControlName="number"></ion-input>
+      </ion-item>
+      <ion-item class="input-holder">
+        <ion-label floating>Email</ion-label>
+        <ion-input TYPE="EMAIL"  formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item class="input-holder">
+        <ion-label floating>Home Address</ion-label>
+        <ion-input TYPE="TEXT" formControlName="home"></ion-input>
+      </ion-item>
+      <ion-item class="input-holder">
+        <ion-label floating>Work Address</ion-label>
+        <ion-input TYPE="TEXT" formControlName="work"></ion-input>
+      </ion-item>
+      <ion-item class="input-holder">
+        <ion-label floating>Car Year</ion-label>
+        <ion-input TYPE="TEXT" formControlName="carYear"></ion-input>
+      </ion-item>
+      <ion-item class="input-holder">
+        <ion-label floating>Car Model</ion-label>
+        <ion-input TYPE="TEXT" formControlName="carModel"></ion-input>
+      </ion-item>
+      <ion-item class="input-holder">
+        <ion-label floating>Car Make</ion-label>
+        <ion-input TYPE="TEXT" formControlName="carMake"></ion-input>
+      </ion-item>
+      <ion-item class="input-holder">
+        <ion-label floating>Engine Type</ion-label>
+        <ion-input TYPE="TEXT" formControlName="carEngine"></ion-input>
+      </ion-item>
+      <ion-item class="input-holder">
+        <button ion-button secondary clear (click)=openCalender($event)>
+          <ion-icon name="ios-calendar" class="calender-icon"></ion-icon>Schedule Appointment
+        </button>
+      </ion-item>
+      <ion-item class="input-holder" *ngIf="selectedDate">
+          {{selectedDate}}
+        </ion-item>
+      <button ion-button secondary danger class="button-holder" (click)="closeAppointmentForm()">Cancel</button>
+      <button ion-button secondary class="button-holder" type="submit">Save</button>
+    </form>
+  </div>
+</ion-content>

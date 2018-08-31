@@ -7,8 +7,31 @@
 
   <ion-content>
     <ion-list>
+      <button menuClose ion-item (click)="openAppointmentPage()">
+        Schedule Appointment
+      </button>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<ion-menu id="RIGHTMENU" [content]="content" side="right">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title></ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <button menuClose="RIGHTMENU" ion-item (click)="openLoginPage()">
+        LOGIN
+      </button>
+      <button menuClose="RIGHTMENU" ion-item (click)="openSignupPage()">
+        SIGN UP
       </button>
     </ion-list>
   </ion-content>

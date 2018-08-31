@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Login</ion-title>
+      <button ion-button menuToggle="RIGHTMENU" right>
+        <ion-icon name="ios-more"></ion-icon>
+      </button>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding class="login-wrapper">
+      <ion-item class="input-holder">
+        <ion-label floating>Username</ion-label>
+        <ion-input TYPE="TEXT" VALUE=""></ion-input>
+      </ion-item>
+      <ion-item class="input-holder">
+        <ion-label floating>Password</ion-label>
+        <ion-input TYPE="PASSWORD"></ion-input>
+      </ion-item>
+      <ion-item class="input-holder">
+          <ion-label floating>Confirm Password</ion-label>
+          <ion-input TYPE="PASSWORD"></ion-input>
+        </ion-item>
+      <button ion-button secondary block class="button-holder">Sign Up</button>
+      <div text-center class="forgot-password">
+        <p>Already a member
+          <a class="signup-button" href="javascript:void(0)" (click)="openSignupPage()">
+            Login
+          </a>
+        </p>
+      </div>
+  </ion-content>

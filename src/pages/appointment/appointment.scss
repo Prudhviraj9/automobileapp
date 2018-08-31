@@ -1,0 +1,31 @@
+.add-icon {
+    font-size: 30px;
+    width: 15%;
+    border: 1px dashed #568BF7;
+    padding-top: 5px;
+    text-align: center;
+}
+
+.add-location {
+    display: flex;
+    cursor: pointer;
+}
+
+.new-location {
+    display: flex;
+    justify-content: space-between;
+    color: #568BF7;
+    width: 84%;
+    padding: 10px;
+    border-width: 1px 1px 1px 0;
+    border-color: #568BF7;
+    border-style: dashed;
+
+    div:first-child {
+        font-weight: bold;
+    }
+}
+
+.calender-icon {
+    padding-right: 10px;
+}
