@@ -11,21 +11,25 @@
 </ion-header>
 
 <ion-content padding class="login-wrapper">
+  <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()">
     <ion-item class="input-holder">
       <ion-label floating>Username</ion-label>
-      <ion-input TYPE="TEXT" VALUE=""></ion-input>
+      <ion-input type="text" value="" formControlName="firstName"></ion-input>
     </ion-item>
     <ion-item class="input-holder">
       <ion-label floating>Password</ion-label>
-      <ion-input TYPE="PASSWORD"></ion-input>
+      <ion-input type="password" formControlName="password"></ion-input>
     </ion-item>
-    <button ion-button secondary block class="button-holder"><ion-icon class="facebook-icon" name="logo-facebook"></ion-icon>Sign In with facebook</button>
-    <button ion-button secondary block class="button-holder">Sign In</button>
-    <div text-center class="forgot-password">
-      <p>Not a member
-        <a class="signup-button" href="javascript:void(0)" (click)="openSignupPage()">
-          Sign up
-        </a>
-      </p>
-    </div>
+    <button ion-button secondary block class="button-holder">
+      <ion-icon class="facebook-icon" name="logo-facebook"></ion-icon>Sign In with facebook
+    </button>
+    <button ion-button secondary block class="button-holder" type="submit">Sign In</button>
+  </form>
+  <div text-center class="forgot-password">
+    <p>Not a member
+      <a class="signup-button" href="javascript:void(0)" (click)="openSignupPage()">
+        Sign up
+      </a>
+    </p>
+  </div>
 </ion-content>

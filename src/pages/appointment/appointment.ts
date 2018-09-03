@@ -1,24 +1,26 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { DatePicker } from '@ionic-native/date-picker';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component } from "@angular/core";
+import { NavController } from "ionic-angular";
+import { DatePicker } from "@ionic-native/date-picker";
+import { FormBuilder, FormGroup } from "@angular/forms";
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'appointment.html'
+  selector: "page-home",
+  templateUrl: "appointment.html"
 })
-
 export class AppointmentPage {
-
-  showForm:boolean;
+  showForm: boolean;
 
   pages: Array<any>;
 
-  private appointmentForm : FormGroup;
+  private appointmentForm: FormGroup;
 
   selectedDate: any;
 
-  constructor(public navCtrl: NavController, private datePicker: DatePicker, private formBuilder: FormBuilder) {
+  constructor(
+    public navCtrl: NavController,
+    private datePicker: DatePicker,
+    private formBuilder: FormBuilder
+  ) {
     this.showForm = false;
     this.pages = [];
 
@@ -27,17 +29,17 @@ export class AppointmentPage {
 
   initializeForm() {
     this.appointmentForm = this.formBuilder.group({
-      firstName: [''],
-      lastName: [''],
-      number: [''],
-      email: [''],
-      home: [''],
-      work: [''],
-      carYear: [''],
-      carModel: [''],
-      carMake: [''],
-      carEngine: [''],
-      slot: ['']
+      firstName: [""],
+      lastName: [""],
+      number: [""],
+      email: [""],
+      home: [""],
+      work: [""],
+      carYear: [""],
+      carModel: [""],
+      carMake: [""],
+      carEngine: [""],
+      slot: [""]
     });
   }
 
@@ -50,22 +52,48 @@ export class AppointmentPage {
   }
 
   openCalender() {
-    this.datePicker.show({
-      date: new Date(),
-      mode: 'datetime',
-      minuteInterval: 15,
-      allowOldDates: false,
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
-    }).then(
-      date => {
-        this.selectedDate = date;
-      },
-      err => console.log('Error occurred while getting date: ', err)
-    );
+    this.datePicker
+      .show({
+        date: new Date(),
+        mode: "datetime",
+        minuteInterval: 15,
+        allowOldDates: false,
+        androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+      })
+      .then(
+        date => {
+          this.selectedDate = date.toLocaleDateString() + " " + date.toLocaleTimeString;
+        },
+        err => console.log("Error occurred while getting date: ", err)
+      );
   }
 
   saveAppointmentForm() {
     this.pages.push(this.appointmentForm.value);
+    var bodyString = "";
+    Object.keys(this.appointmentForm.value).forEach(key => {
+      bodyString += `<p>${key} is ${this.appointmentForm.value[key]}</p>`;
+    });
+    bodyString += `<p>on ${this.selectedDate}</p>`
+    var url = new URL("https://sleepy-oasis-76333.herokuapp.com/send");
+    var url1 = new URL("https://sleepy-oasis-76333.herokuapp.com/send");
+    var body1: any = {
+      to: "bpamnani@gmail.com",
+      subject: `Appointment Scheduled on ${this.selectedDate}`,
+      text: bodyString
+    };
+    var body2: any = {
+      to: this.appointmentForm.value.email,
+      subject: `Appointment Scheduled with automobile on ${this.selectedDate}`,
+      text: "Your appointment is successfully scheduled with automobile"
+    };
+    Object.keys(body1).forEach(key => url.searchParams.append(key, body1[key]));
+    window.fetch(url.href);
+    this.showForm = false;
+    this.initializeForm();
+    Object.keys(body2).forEach(key => url1.searchParams.append(key, body2[key]));
+    window.fetch(url1.href);
+    this.showForm = false;
     this.initializeForm();
   }
 }
