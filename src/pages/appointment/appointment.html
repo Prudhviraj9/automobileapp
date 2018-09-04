@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content padding class="login-wrapper">
-  <ion-card *ngIf="!showForm">
+  <!-- <ion-card *ngIf="!showForm">
     <ion-card-header>
       Slect Your Location
     </ion-card-header>
@@ -24,8 +24,8 @@
         </div>
       </div>
     </ion-card-content>
-  </ion-card>
-  <div *ngIf="showForm">
+  </ion-card> -->
+  <div>
     <form [formGroup]="appointmentForm" (ngSubmit)="saveAppointmentForm()">
       <ion-item class="input-holder">
         <ion-label floating>Firstname</ion-label>
