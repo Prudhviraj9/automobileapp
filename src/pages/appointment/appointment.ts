@@ -2,13 +2,13 @@ import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
 import { DatePicker } from "@ionic-native/date-picker";
 import { FormBuilder, FormGroup } from "@angular/forms";
+import { ToastController } from 'ionic-angular';
 
 @Component({
   selector: "page-home",
   templateUrl: "appointment.html"
 })
 export class AppointmentPage {
-  showForm: boolean;
 
   pages: Array<any>;
 
@@ -19,11 +19,11 @@ export class AppointmentPage {
   constructor(
     public navCtrl: NavController,
     private datePicker: DatePicker,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public toastCtrl: ToastController
   ) {
-    this.showForm = false;
     this.pages = [];
-
+    console.log('here2')
     this.initializeForm();
   }
 
@@ -43,14 +43,6 @@ export class AppointmentPage {
     });
   }
 
-  openAppointmentForm() {
-    this.showForm = true;
-  }
-
-  closeAppointmentForm() {
-    this.showForm = false;
-  }
-
   openCalender() {
     this.datePicker
       .show({
@@ -62,13 +54,24 @@ export class AppointmentPage {
       })
       .then(
         date => {
-          this.selectedDate = date.toLocaleDateString() + " " + date.toLocaleTimeString;
+          debugger;
+          this.selectedDate = date.toLocaleDateString() + " " + date.toLocaleTimeString();
+          console.log(this.selectedDate);
         },
         err => console.log("Error occurred while getting date: ", err)
       );
   }
 
   saveAppointmentForm() {
+    if(!this.selectedDate) {
+      const toast = this.toastCtrl.create({
+        message: 'Please enter a valid date',
+        showCloseButton: true,
+        closeButtonText: 'Ok'
+      });
+      toast.present();
+      return;
+    }
     this.pages.push(this.appointmentForm.value);
     var bodyString = "";
     Object.keys(this.appointmentForm.value).forEach(key => {
@@ -85,15 +88,13 @@ export class AppointmentPage {
     var body2: any = {
       to: this.appointmentForm.value.email,
       subject: `Appointment Scheduled with automobile on ${this.selectedDate}`,
-      text: "Your appointment is successfully scheduled with automobile"
+      text: `Your appointment is successfully scheduled with automobile on ${this.selectedDate}`
     };
     Object.keys(body1).forEach(key => url.searchParams.append(key, body1[key]));
     window.fetch(url.href);
-    this.showForm = false;
-    this.initializeForm();
     Object.keys(body2).forEach(key => url1.searchParams.append(key, body2[key]));
     window.fetch(url1.href);
-    this.showForm = false;
     this.initializeForm();
+    this.selectedDate = "";
   }
 }

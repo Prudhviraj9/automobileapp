@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Login</ion-title>
+    <ion-title>Schedule Appointment</ion-title>
     <button ion-button menuToggle="RIGHTMENU" right>
       <ion-icon name="ios-more"></ion-icon>
     </button>
@@ -68,7 +68,7 @@
         <ion-input TYPE="TEXT" formControlName="carEngine"></ion-input>
       </ion-item>
       <ion-item class="input-holder">
-        <button ion-button secondary clear (click)=openCalender($event)>
+        <button ion-button secondary clear type="button" (click)=openCalender($event)>
           <ion-icon name="ios-calendar" class="calender-icon"></ion-icon>Schedule Appointment
         </button>
       </ion-item>
