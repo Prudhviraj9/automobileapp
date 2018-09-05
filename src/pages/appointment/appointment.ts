@@ -72,6 +72,12 @@ export class AppointmentPage {
       toast.present();
       return;
     }
+    const toast = this.toastCtrl.create({
+      message: 'Appointment successfully scheduled',
+      showCloseButton: true,
+      closeButtonText: 'Ok'
+    });
+    toast.present();
     this.pages.push(this.appointmentForm.value);
     var bodyString = "";
     Object.keys(this.appointmentForm.value).forEach(key => {
